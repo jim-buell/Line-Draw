@@ -94,14 +94,43 @@ def make_sin_wave():
 
             total_waves = ((range_end - range_start) / range_step) * ((amp_range_end - amp_range_start) / amp_range_step)
             counter += 1
-            print("Sine wave {} of {}.".format(counter, total_waves))
+            print("Sine wave {} of {}.".format(counter, int(total_waves)))
+
+            points_to_gcode(points)
+
+
+def make_big_wave():
+
+    counter = 0
+
+    range_start = 0
+    range_end = 495
+    range_step = 99
+    for start in range(range_start, range_end, range_step):
+
+        amp_range_start = 100
+        amp_range_end = 540
+        amp_range_step = 20 #10
+
+        for amp_range in range(amp_range_start, amp_range_end, amp_range_step):
+            amplitude = amp_range # Amplitude between 10 and 540
+            frequency = 8 # Frequence between .5 and 20
+            start_offset = start
+            step = 100
+            points = get_sin_wave_points(amplitude, frequency, step, start_offset)
+
+            #total_waves = ((amp_range_end - amp_range_start) / amp_range_step)
+            total_waves = ((range_end - range_start) / range_step) * ((amp_range_end - amp_range_start) / amp_range_step)
+            counter += 1
+            print("Sine wave {} of {}.".format(counter, int(total_waves)))
 
             points_to_gcode(points)
 
 # ———————— Script ————————— #    
 
 #make_circle_spiral()
-make_sin_wave()
+#make_sin_wave()
+make_big_wave()
 
 # ———————— Cleanup ————————— #
 
