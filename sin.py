@@ -1,5 +1,8 @@
-import matplotlib.pyplot as plt
 import math
+import matplotlib.pyplot as plt
+
+xlist = []
+ylist = []
 
 def get_sin_wave_points(amplitude, frequency, step, start_offset):
     points = []
@@ -9,33 +12,27 @@ def get_sin_wave_points(amplitude, frequency, step, start_offset):
             x = i / step
             y = (amplitude * math.sin(2 * math.pi * frequency * x) + 1240)
             points.append((y, (x * 1000) + start))
-    plt.plot(y, x)
-    #plt.show()  
+    #my_line.g01(y, x, 1000) # Lifts the pen at the end of the wave
+    return points
 
-def make_sin_wave():
-
-    counter = 0
-
-    range_start = 0
-    range_end = 495
-    range_step = 99
-    for start in range(range_start, range_end, range_step):
-
-        amp_range_start = 100
-        amp_range_end = 540
-        amp_range_step = 10
-
-        for amp_range in range(amp_range_start, amp_range_end, amp_range_step):
-            amplitude = amp_range # Amplitude between 10 and 540
-            frequency = 1 # Frequence between .5 and 20
-            start_offset = start
-            step = 100
-            points = get_sin_wave_points(amplitude, frequency, step, start_offset)
-
-            total_waves = ((range_end - range_start) / range_step) * ((amp_range_end - amp_range_start) / amp_range_step)
-            counter += 1
-            print("Sine wave {} of {}.".format(counter, int(total_waves)))
+def get_sawtooth_wave_points(amplitude, frequency, step):
+    points = []
+    num_steps = int(1 / frequency / step)
+    for i in range(num_steps):
+        x = i * step
+        y = (amplitude * (2 * (x * frequency - math.floor(x * frequency + 0.5)))) + 1240
+        points.append((x, y))
+    xlist.append(x)
+    ylist.append(y)
+    plt.plot(xlist, ylist)
     plt.show()
+    return points
 
-make_sin_wave()
+# Example usage
+amplitude = 20
+frequency = 0.25
+step = 0.01
+points = get_sawtooth_wave_points(amplitude, frequency, step)
+
+print(points)
 
