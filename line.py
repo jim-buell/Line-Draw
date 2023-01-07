@@ -90,7 +90,7 @@ def make_sin_wave():
 
     counter = 0
 
-    range_start = 0
+    range_start = -99
     range_end = 495
     range_step = 99
     for start in range(range_start, range_end, range_step):
@@ -144,8 +144,8 @@ def make_sawtooth():
 # ———————— Script ————————— #    
 
 #make_circle_spiral()
-#make_sin_wave()
-make_sawtooth()
+make_sin_wave()
+#make_sawtooth()
 
 # ———————— Cleanup ————————— #
 
