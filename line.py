@@ -139,52 +139,32 @@ def make_sawtooth():
 
             points_to_gcode(points)
         adder += 40
+
+def make_concentric_circles(): # Makes a series of circles (which are filled in) of random size on random part of the paper. 
+    for x in range(0, random.randint(5, 10)): # Defines the number of total circles to make. 
+        center = [random.randint(1000, 1600), random.randint(-700, 700)] # Randomly determines where the center is.
+        num_points = 50 # Defines the number of points that make up each circle. 
+        for radius in range(50, random.randrange(100, 400, 50), 10): # Itereates drawing increasingly-large individual circles in sequence to create filled in circles. 
+            points_to_gcode(get_circle_points(center, radius, num_points)) # Calls the circle-creation code and passes it to the Line-US. 
+        my_line.g01(center[0], center[1], 1000) # Lifts the pen at the end of filled circle. 
+
+def make_random_circles():
+    for x in range(0, random.randint(30, 50)): # Defines the number of total circles to make. 
+        center = [random.randint(1000, 1600), random.randint(-700, 700)] # Randomly determines where the center is.
+        num_points = 50 # Defines the number of points that make up each circle. 
+        radius = random.randrange(100, 500, 25)
+        points_to_gcode(get_circle_points(center, radius, num_points)) # Calls the circle-creation code and passes it to the Line-US. 
+        #my_line.g01(center[0], center[1], 1000) # Lifts the pen at the end of filled circle. 
         
 
 # ———————— Script ————————— #    
 
 #make_circle_spiral()
-make_sin_wave()
+#make_sin_wave()
 #make_sawtooth()
+#make_concentric_circles()
+make_random_circles()
 
 # ———————— Cleanup ————————— #
 
 my_line.disconnect()
-
-
-# ———————— Old ————————— #
-
-# def circles_from_left():
-#     x = 1200
-#     y = -1000 # This is effectivly the counter. Once it reaches 1000, it's the end of the plane.
-#     radius = 50
-#     points = 50
-#     counter = 0
-#     until = 1000
-#     y_increment = 5
-#     while y < until:
-#         points_to_gcode(get_circle_points((x, y), radius, points))
-#         #x += 1
-#         y += y_increment
-#         radius += 1
-#         points += 1
-#         counter += 1
-#         print(("Circle number", counter, "of" ((abs(y)+abs(until)) / y_increment)))
-
-
-# def circles_from_right():
-#     x = 1200
-#     y = 1000 # This is effectivly the counter. Once it reaches 1000, it's the end of the plane.
-#     radius = 50
-#     points = 50
-#     counter = 0
-#     until = -1000
-#     y_increment = -5
-#     while y > until:
-#         points_to_gcode(get_circle_points((x, y), radius, points))
-#         #x += 1
-#         y += y_increment
-#         radius += 1
-#         points += 1
-#         counter += 1
-#         print(("Circle number", counter, "of" ((abs(y)+abs(until)) / y_increment)))
