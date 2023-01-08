@@ -148,22 +148,14 @@ def make_concentric_circles(): # Makes a series of circles (which are filled in)
             points_to_gcode(get_circle_points(center, radius, num_points)) # Calls the circle-creation code and passes it to the Line-US. 
         my_line.g01(center[0], center[1], 1000) # Lifts the pen at the end of filled circle. 
 
-def make_random_circles():
-    for x in range(0, random.randint(30, 50)): # Defines the number of total circles to make. 
-        center = [random.randint(1000, 1600), random.randint(-700, 700)] # Randomly determines where the center is.
-        num_points = 50 # Defines the number of points that make up each circle. 
-        radius = random.randrange(100, 500, 25)
-        points_to_gcode(get_circle_points(center, radius, num_points)) # Calls the circle-creation code and passes it to the Line-US. 
-        #my_line.g01(center[0], center[1], 1000) # Lifts the pen at the end of filled circle. 
         
 
 # ———————— Script ————————— #    
 
 #make_circle_spiral()
-#make_sin_wave()
+make_sin_wave()
 #make_sawtooth()
 #make_concentric_circles()
-make_random_circles()
 
 # ———————— Cleanup ————————— #
 
