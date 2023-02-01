@@ -11,6 +11,7 @@ time.sleep(1)
 
 # ——————— Functions ———————— #
 
+
 def get_circle_points(center, radius, num_points):
     points = []
     for i in range(num_points):
@@ -20,7 +21,7 @@ def get_circle_points(center, radius, num_points):
         points.append((x, y))
     return points
 
-def get_sin_wave_points(amplitude, frequency, step, start_offset):
+def get_sine_wave_points(amplitude, frequency, step, start_offset):
     points = []
     starting_points = [-1000 + start_offset, 0 + start_offset]
     for start in starting_points:
@@ -86,7 +87,7 @@ def make_circle_spiral():
         segement_counter += 1
 
 
-def make_sin_wave():
+def make_sine_wave():
 
     counter = 0
 
@@ -104,7 +105,7 @@ def make_sin_wave():
             frequency = 1 # Frequence between .5 and 20
             start_offset = start
             step = 100
-            points = get_sin_wave_points(amplitude, frequency, step, start_offset)
+            points = get_sine_wave_points(amplitude, frequency, step, start_offset)
 
             total_waves = ((range_end - range_start) / range_step) * ((amp_range_end - amp_range_start) / amp_range_step)
             counter += 1
@@ -148,12 +149,10 @@ def make_concentric_circles(): # Makes a series of circles (which are filled in)
             points_to_gcode(get_circle_points(center, radius, num_points)) # Calls the circle-creation code and passes it to the Line-US. 
         my_line.g01(center[0], center[1], 1000) # Lifts the pen at the end of filled circle. 
 
-        
-
 # ———————— Script ————————— #    
 
 #make_circle_spiral()
-make_sin_wave()
+make_sine_wave()
 #make_sawtooth()
 #make_concentric_circles()
 

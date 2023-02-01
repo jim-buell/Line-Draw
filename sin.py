@@ -12,6 +12,8 @@ def get_sin_wave_points(amplitude, frequency, step, start_offset):
             x = i / step
             y = (amplitude * math.sin(2 * math.pi * frequency * x) + 1240)
             points.append((y, (x * 1000) + start))
+            plt.plot(xlist, ylist)
+            plt.show()
     #my_line.g01(y, x, 1000) # Lifts the pen at the end of the wave
     return points
 
